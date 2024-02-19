@@ -29,6 +29,7 @@
 		A03920022B83653E0027EC70 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920012B83653E0027EC70 /* Date+Extension.swift */; };
 		A03920042B83654D0027EC70 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920032B83654D0027EC70 /* MainCollectionViewCell.swift */; };
 		A03920062B8366300027EC70 /* AddDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920052B8366300027EC70 /* AddDetailViewController.swift */; };
+		A039200B2B83C40F0027EC70 /* ListIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A039200A2B83C40F0027EC70 /* ListIcon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		A03920012B83653E0027EC70 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		A03920032B83654D0027EC70 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		A03920052B8366300027EC70 /* AddDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailViewController.swift; sourceTree = "<group>"; };
+		A039200A2B83C40F0027EC70 /* ListIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIcon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		A0391FC72B8360BA0027EC70 /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
+				A03920072B8369E90027EC70 /* Components */,
 				A0391FE22B8361650027EC70 /* Main */,
 				A0391FE32B83616E0027EC70 /* Add */,
 				A0391FE12B8361590027EC70 /* Model */,
@@ -148,6 +151,14 @@
 				A03920012B83653E0027EC70 /* Date+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		A03920072B8369E90027EC70 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A039200A2B83C40F0027EC70 /* ListIcon.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +257,7 @@
 				A0391FDE2B83614E0027EC70 /* BaseViewController.swift in Sources */,
 				A0391FC92B8360BA0027EC70 /* AppDelegate.swift in Sources */,
 				A03920062B8366300027EC70 /* AddDetailViewController.swift in Sources */,
+				A039200B2B83C40F0027EC70 /* ListIcon.swift in Sources */,
 				A0391FE82B83619B0027EC70 /* BaseTableViewCell.swift in Sources */,
 				A0391FCB2B8360BA0027EC70 /* SceneDelegate.swift in Sources */,
 			);
