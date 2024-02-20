@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+extension Date {
+    var formattedDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        return dateFormatter.string(from: self)
+    }
+}

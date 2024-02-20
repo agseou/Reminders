@@ -6,3 +6,26 @@
 //
 
 import Foundation
+import RealmSwift
+
+final class ReminderRepository {
+    
+    private let realm = try! Realm()
+    
+    func createItem(_ item: ReminderModel) {
+        do {
+            try realm.write {
+                realm.add(item)
+                print("Realm create")
+            }
+        } catch {
+            print(error)
+        }
+        print(realm.configuration.fileURL!)
+    }
+    
+    func fetchItem() -> Results<ReminderModel> {
+        return realm.objects(ReminderModel.self)
+    }
+    
+}

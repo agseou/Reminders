@@ -30,6 +30,11 @@
 		A03920042B83654D0027EC70 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920032B83654D0027EC70 /* MainCollectionViewCell.swift */; };
 		A03920062B8366300027EC70 /* AddDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920052B8366300027EC70 /* AddDetailViewController.swift */; };
 		A039200B2B83C40F0027EC70 /* ListIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A039200A2B83C40F0027EC70 /* ListIcon.swift */; };
+		A039200E2B83D5F50027EC70 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A039200D2B83D5F50027EC70 /* ImagePickerViewController.swift */; };
+		A03920102B83D5FC0027EC70 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A039200F2B83D5FC0027EC70 /* DatePickerViewController.swift */; };
+		A03920122B83D6040027EC70 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920112B83D6040027EC70 /* TagViewController.swift */; };
+		A03920152B841FFA0027EC70 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920142B841FFA0027EC70 /* ListViewController.swift */; };
+		A03920172B84217C0027EC70 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920162B84217C0027EC70 /* ListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +58,11 @@
 		A03920032B83654D0027EC70 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		A03920052B8366300027EC70 /* AddDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailViewController.swift; sourceTree = "<group>"; };
 		A039200A2B83C40F0027EC70 /* ListIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIcon.swift; sourceTree = "<group>"; };
+		A039200D2B83D5F50027EC70 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
+		A039200F2B83D5FC0027EC70 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		A03920112B83D6040027EC70 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
+		A03920142B841FFA0027EC70 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		A03920162B84217C0027EC70 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +141,8 @@
 			children = (
 				A0391FE92B8362FE0027EC70 /* MainViewController.swift */,
 				A03920032B83654D0027EC70 /* MainCollectionViewCell.swift */,
+				A03920142B841FFA0027EC70 /* ListViewController.swift */,
+				A03920162B84217C0027EC70 /* ListTableViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -140,6 +152,7 @@
 			children = (
 				A0391FEB2B8363040027EC70 /* AddViewController.swift */,
 				A03920052B8366300027EC70 /* AddDetailViewController.swift */,
+				A039200C2B83D5DE0027EC70 /* Details */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -159,6 +172,16 @@
 				A039200A2B83C40F0027EC70 /* ListIcon.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A039200C2B83D5DE0027EC70 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				A039200D2B83D5F50027EC70 /* ImagePickerViewController.swift */,
+				A039200F2B83D5FC0027EC70 /* DatePickerViewController.swift */,
+				A03920112B83D6040027EC70 /* TagViewController.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,11 +276,16 @@
 				A03920042B83654D0027EC70 /* MainCollectionViewCell.swift in Sources */,
 				A03920022B83653E0027EC70 /* Date+Extension.swift in Sources */,
 				A0391FFC2B8364BE0027EC70 /* ReminderModel.swift in Sources */,
+				A03920152B841FFA0027EC70 /* ListViewController.swift in Sources */,
+				A03920172B84217C0027EC70 /* ListTableViewCell.swift in Sources */,
 				A0391FCD2B8360BA0027EC70 /* ViewController.swift in Sources */,
 				A0391FDE2B83614E0027EC70 /* BaseViewController.swift in Sources */,
+				A039200E2B83D5F50027EC70 /* ImagePickerViewController.swift in Sources */,
 				A0391FC92B8360BA0027EC70 /* AppDelegate.swift in Sources */,
+				A03920102B83D5FC0027EC70 /* DatePickerViewController.swift in Sources */,
 				A03920062B8366300027EC70 /* AddDetailViewController.swift in Sources */,
 				A039200B2B83C40F0027EC70 /* ListIcon.swift in Sources */,
+				A03920122B83D6040027EC70 /* TagViewController.swift in Sources */,
 				A0391FE82B83619B0027EC70 /* BaseTableViewCell.swift in Sources */,
 				A0391FCB2B8360BA0027EC70 /* SceneDelegate.swift in Sources */,
 			);
