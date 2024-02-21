@@ -8,13 +8,29 @@
 import UIKit
 import SnapKit
 
+struct ListBox {
+    let title: String
+    let color: UIColor
+    let icon: UIImage
+    let num: Int
+}
+
 class MainViewController: BaseViewController {
 
     let searchController = UISearchController()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    let ListBoxs: [ListBox] = [
+        ListBox(title: "예정", color: .systemRed, icon: UIImage(systemName: "calendar")!, num: 0),
+        ListBox(title: "오늘", color: .systemBlue, icon: UIImage(systemName: "calendar")!, num: 0),
+        ListBox(title: "전체", color: .label, icon: UIImage(systemName: "tray.fill")!, num: 0),
+        ListBox(title: "깃발 표시", color: .systemOrange, icon: UIImage(systemName: "flag.fill")!, num: 0),
+        ListBox(title: "완료됨", color: .systemGray, icon: UIImage(systemName: "checkmark")!, num: 0),
+        ListBox(title: "할당", color: .systemGreen, icon: UIImage(systemName: "person.fill")!, num: 0)
+    ]
     
     override func configureHierarchy() {
-        view.addSubview(collectionView)
+        view.addSubview(tableView)
     }
     
     override func configureView() {
@@ -50,14 +66,22 @@ class MainViewController: BaseViewController {
         navigationController?.setToolbarHidden(false, animated: false)
         
         // collectionView 설정
+        collectionView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 330)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
+        
+        // tableView 설정
+        tableView.tableHeaderView = collectionView
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func configureConstraints() {
-        collectionView.snp.makeConstraints {
+        tableView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -66,6 +90,7 @@ class MainViewController: BaseViewController {
     static func configureCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width/2 - 22.5
+        layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: width, height: width/2)
         layout.minimumLineSpacing = 15
         layout.minimumInteritemSpacing = 10
@@ -81,7 +106,8 @@ class MainViewController: BaseViewController {
     
     // 목록 추가 버튼 액션
     @objc func tapAddListButton() {
-        
+        let vc = UINavigationController(rootViewController: AddListViewController())
+        present(vc, animated: true)
     }
     
     // 목록 편집 버튼 액션
@@ -95,14 +121,65 @@ class MainViewController: BaseViewController {
 // MARK: - CollectionView Extension
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return ListBoxs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as! MainCollectionViewCell
         
+        cell.iconView.circleView.backgroundColor = ListBoxs[indexPath.row].color
+        cell.iconView.icon.image = ListBoxs[indexPath.row].icon
+        cell.titleLabel.text = ListBoxs[indexPath.row].title
+        cell.countLabel.text = "\(ListBoxs[indexPath.row].num)"
+        
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = ListViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
+}
+
+// MARK: - TableView Extension
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = UITableViewCell()
+        if indexPath.section == 0 {
+            cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+            cell.textLabel?.text = "미리알림"
+            cell.accessoryType = .disclosureIndicator
+        } else {
+            cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+            
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+         if section == 0 {
+            return "나의 목록"
+        } else {
+            return "태그"
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+           
+       } else {
+           
+       }
+    }
+   
 }

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class ListTableViewCell: BaseTableViewCell {
-
+    
     let data = ReminderModel()
     let checkButton = UIButton(type: .roundedRect)
     let stackView = UIStackView()
@@ -37,19 +37,31 @@ class ListTableViewCell: BaseTableViewCell {
         titleStackView.addArrangedSubview(priorityMark)
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(flagMark)
-
+        
     }
     
     override func configureView() {
+        
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 4
+        
+        titleStackView.axis = .horizontal
+        titleStackView.alignment = .fill
+        titleStackView.distribution = .equalSpacing
+        titleStackView.spacing = 4
+        
         titleLabel.text = data.title
+        titleLabel.text = "test"
         
         memoLabel.text = data.memo
+        memoLabel.text = "testmemo"
         
-        dateLabel.text = finalDate?.formattedDate
-        
-        
+        dateLabel.text = data.finalDate?.formattedDate
+        dateLabel.text = Date().formattedDate
     }
-
+    
     override func configureConstraints() {
         checkButton.snp.makeConstraints {
             $0.left.top.equalTo(contentView).offset(10)

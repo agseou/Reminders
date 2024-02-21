@@ -11,7 +11,7 @@ import SnapKit
 class ListIcon: UIView {
 
     let circleView = UIView()
-    let iconView = UIImageView(image: UIImage(systemName: "calendar"))
+    let icon = UIImageView(image: UIImage(systemName: "calendar"))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,21 +27,21 @@ class ListIcon: UIView {
     
     func configureHierarchy() { 
         addSubview(circleView)
-        circleView.addSubview(iconView)
+        circleView.addSubview(icon)
     }
     func configureView() {
         DispatchQueue.main.async {
             self.circleView.layer.cornerRadius = self.circleView.bounds.width/2
         }
         circleView.backgroundColor = .blue
-        iconView.tintColor = .white
+        icon.tintColor = .white
     }
     func configureConstraints() {
         circleView.snp.makeConstraints {
             $0.edges.equalTo(self)
             $0.size.equalTo(36)
         }
-        iconView.snp.makeConstraints {
+        icon.snp.makeConstraints {
             $0.edges.equalTo(circleView).inset(4)
         }
     }

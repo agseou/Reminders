@@ -55,7 +55,7 @@ class AddViewController: BaseViewController {
     
     @objc func tapAddButton() {
         guard let title = titleTextField.text, !title.isEmpty else { return }
-        guard let memo = memoTextField.text, !memo.isEmpty else { return }
+        guard let memo = memoTextField.text, !memo.isEmpty else { return  }
         guard let date = date else { return }
         guard let tag = tag else { return }
         guard let priority = priority else { return }
@@ -86,20 +86,25 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath)
             cell.contentView.addSubview(titleTextField)
             titleTextField.snp.makeConstraints {
-                $0.horizontalEdges.equalToSuperview().inset(10)
+                $0.horizontalEdges.equalToSuperview().inset(20)
                 $0.verticalEdges.equalToSuperview()
+                $0.height.equalTo(40)
             }
             
             cell.selectionStyle = .none
+            
         } else if indexPath == IndexPath(row: 1, section: 0) {
             cell = tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath)
             cell.contentView.addSubview(memoTextField)
+            memoTextField.font = .systemFont(ofSize: 15)
             memoTextField.snp.makeConstraints {
-                $0.horizontalEdges.equalToSuperview().inset(10)
+                $0.horizontalEdges.equalToSuperview().inset(20)
+                $0.height.equalTo(120)
                 $0.verticalEdges.equalToSuperview()
             }
             
             cell.selectionStyle = .none
+            
         } else if indexPath == IndexPath(row: 0, section: 1) {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "detailCell")
             cell.textLabel?.text = "세부사항"

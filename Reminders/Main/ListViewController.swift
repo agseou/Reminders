@@ -31,6 +31,7 @@ class ListViewController: BaseViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: "ListTableViewCell")
     }
 
     override func configureConstraints() {
@@ -46,7 +47,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableViewCell", for: indexPath) as! ListTableViewCell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableViewCell", for: indexPath) as! ListTableViewCell
         
         return cell
     }
