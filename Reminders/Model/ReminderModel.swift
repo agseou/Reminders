@@ -37,3 +37,13 @@ class ReminderModel: Object {
         self.flag = false // 생성시에 기본은 false
     }
 }
+
+class TagModel: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var tag: String
+    
+    convenience init(tag: String) {
+        self.init()
+        self.tag = tag
+    }
+}

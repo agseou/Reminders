@@ -62,7 +62,7 @@ class AddViewController: BaseViewController {
         guard let title = titleTextField.text, !title.isEmpty else { return }
         
         let date = date ?? nil
-        let tag = tag ?? nil
+            // let tag = tag ?? nil
         let priority = priority ?? nil
         
         let data = ReminderModel(title: title, memo: memoTextField.text, finalDate: date, tags: List<String?>(), priority: priority, compelete: false, flag: flag)

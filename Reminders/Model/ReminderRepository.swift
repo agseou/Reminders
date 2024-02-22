@@ -13,7 +13,7 @@ final class ReminderRepository {
     private let realm = try! Realm()
     
     // 생성
-    func createItem(_ item: ReminderModel) {
+    func createItem<T: Object>(_ item: T) {
         do {
             try realm.write {
                 realm.add(item)
@@ -26,9 +26,8 @@ final class ReminderRepository {
     }
     
     // 데이터 주기
-    func fetchItem() -> Results<ReminderModel> {
-        return realm.objects(ReminderModel.self)
+    func fetchItem<T: Object>(ofType type: T.Type) -> Results<T> {
+        return realm.objects(T.self)
     }
-    
     
 }

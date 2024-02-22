@@ -33,6 +33,7 @@
 		A03920172B84217C0027EC70 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920162B84217C0027EC70 /* ListTableViewCell.swift */; };
 		A03920192B848BF60027EC70 /* AddTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03920182B848BF60027EC70 /* AddTagViewController.swift */; };
 		A039203B2B84CE1E0027EC70 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A039203A2B84CE1E0027EC70 /* AddListViewController.swift */; };
+		A0553F262B86ECB100F2C600 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0553F252B86ECB100F2C600 /* TagCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		A03920162B84217C0027EC70 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		A03920182B848BF60027EC70 /* AddTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
 		A039203A2B84CE1E0027EC70 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
+		A0553F252B86ECB100F2C600 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				A0391FEB2B8363040027EC70 /* AddViewController.swift */,
 				A03920052B8366300027EC70 /* AddDetailViewController.swift */,
 				A03920182B848BF60027EC70 /* AddTagViewController.swift */,
+				A0553F252B86ECB100F2C600 /* TagCollectionViewCell.swift */,
 				A039203A2B84CE1E0027EC70 /* AddListViewController.swift */,
 			);
 			path = Add;
@@ -270,6 +273,7 @@
 				A0391FC92B8360BA0027EC70 /* AppDelegate.swift in Sources */,
 				A03920062B8366300027EC70 /* AddDetailViewController.swift in Sources */,
 				A039200B2B83C40F0027EC70 /* ListIcon.swift in Sources */,
+				A0553F262B86ECB100F2C600 /* TagCollectionViewCell.swift in Sources */,
 				A0391FE82B83619B0027EC70 /* BaseTableViewCell.swift in Sources */,
 				A0391FCB2B8360BA0027EC70 /* SceneDelegate.swift in Sources */,
 			);

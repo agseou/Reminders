@@ -22,7 +22,7 @@ class ListViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        list = repository.fetchItem()
+        list = repository.fetchItem(ofType: ReminderModel.self)
         
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = viewTitle
