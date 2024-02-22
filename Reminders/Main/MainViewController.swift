@@ -20,14 +20,6 @@ class MainViewController: BaseViewController {
     let searchController = UISearchController()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
-    let ListBoxs: [ListBox] = [
-        ListBox(title: "예정", color: .systemRed, icon: UIImage(systemName: "calendar")!, num: 0),
-        ListBox(title: "오늘", color: .systemBlue, icon: UIImage(systemName: "calendar")!, num: 0),
-        ListBox(title: "전체", color: .label, icon: UIImage(systemName: "tray.fill")!, num: 0),
-        ListBox(title: "깃발 표시", color: .systemOrange, icon: UIImage(systemName: "flag.fill")!, num: 0),
-        ListBox(title: "완료됨", color: .systemGray, icon: UIImage(systemName: "checkmark")!, num: 0),
-        ListBox(title: "할당", color: .systemGreen, icon: UIImage(systemName: "person.fill")!, num: 0)
-    ]
     
     override func configureHierarchy() {
         view.addSubview(tableView)
@@ -121,16 +113,18 @@ class MainViewController: BaseViewController {
 // MARK: - CollectionView Extension
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ListBoxs.count
+        return SortList.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as! MainCollectionViewCell
         
-        cell.iconView.circleView.backgroundColor = ListBoxs[indexPath.row].color
-        cell.iconView.icon.image = ListBoxs[indexPath.row].icon
-        cell.titleLabel.text = ListBoxs[indexPath.row].title
-        cell.countLabel.text = "\(ListBoxs[indexPath.row].num)"
+        let item = SortList.allCases[indexPath.item]
+        
+        cell.iconView.circleView.backgroundColor = item.color
+        cell.iconView.icon.image = item.icon
+        cell.titleLabel.text = item.title
+        cell.countLabel.text = "\(item.num)"
         
         return cell
     }

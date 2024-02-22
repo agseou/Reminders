@@ -55,7 +55,9 @@ class AddViewController: BaseViewController {
     }
     
     @objc func tapCancelButton() {
-        dismiss(animated: true)
+        checkCancelActionSheet() {
+            self.dismiss(animated: true)
+        }
     }
     
     @objc func tapAddButton() {

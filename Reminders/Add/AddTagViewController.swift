@@ -92,7 +92,6 @@ extension AddTagViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.contentView.addSubview(tagCollectionView)
                 tagCollectionView.snp.makeConstraints {
                     $0.edges.equalTo(cell.contentView)
-                    $0.height.greaterThanOrEqualTo(40)
                 }
                 
                 return cell
@@ -103,7 +102,6 @@ extension AddTagViewController: UITableViewDelegate, UITableViewDataSource {
                 textField.placeholder = "새로운 태그 추가..."
                 textField.snp.makeConstraints {
                     $0.edges.equalTo(cell.contentView)
-                    $0.height.equalTo(40)
                 }
                 
                 return cell
@@ -115,7 +113,6 @@ extension AddTagViewController: UITableViewDelegate, UITableViewDataSource {
             textField.placeholder = "새로운 태그 추가..."
             textField.snp.makeConstraints {
                 $0.edges.equalTo(cell.contentView)
-                $0.height.equalTo(40)
             }
             
             return cell

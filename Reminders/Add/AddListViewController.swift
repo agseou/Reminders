@@ -26,7 +26,7 @@ class AddListViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        
+        newListTableView.isHidden = false
         navigationItem.title = "새로운 목록"
         
         let cancelBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(tapCancelButton))
@@ -41,7 +41,7 @@ class AddListViewController: BaseViewController {
         navigationItem.titleView = segmentedControl
         newListTableView.delegate = self
         newListTableView.dataSource = self
-        newListTableView.register(UITableView.self, forCellReuseIdentifier: "cell")
+        newListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func configureConstraints() {
@@ -54,7 +54,9 @@ class AddListViewController: BaseViewController {
     }
     
     @objc func tapCancelButton() {
-        dismiss(animated: true)
+        checkCancelActionSheet() {
+            self.dismiss(animated: true)
+        }
     }
     
     @objc func tapAddButton() {
