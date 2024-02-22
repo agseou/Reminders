@@ -116,5 +116,12 @@ extension AddDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath == IndexPath(row: 0, section: 1){
+            let vc = AddTagViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
 

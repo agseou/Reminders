@@ -7,11 +7,14 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class AddTagViewController: BaseViewController {
 
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     let textField = UITextField()
+    var tempList: [String?] = []
+    var tagList: List<String?> = List<String?>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +27,12 @@ class AddTagViewController: BaseViewController {
     }
     
     override func configureView() {
+        super.configureView()
+        textField.delegate = self
+        
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "tagListCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "insertTagCell")
     }
     
@@ -40,7 +47,7 @@ class AddTagViewController: BaseViewController {
 extension AddTagViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return tempList.isEmpty ? 1 : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,20 +55,54 @@ extension AddTagViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //let cell = UITableViewCell(style: .default, reuseIdentifier: "tagListCell")
-        
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "insertTagCell")
-        
-        cell.contentView.addSubview(textField)
-        textField.placeholder = "새로운 태그 추가..."
-        textField.snp.makeConstraints {
-            $0.edges.equalTo(cell.contentView)
+        if !tempList.isEmpty {
+            if indexPath.section == 0 {
+                let cell = UITableViewCell(style: .default, reuseIdentifier: "tagListCell")
+                
+                cell.textLabel?.text = tempList[0]
+                
+                return cell
+            } else {
+                let cell = UITableViewCell(style: .default, reuseIdentifier: "insertTagCell")
+                
+                cell.contentView.addSubview(textField)
+                textField.placeholder = "새로운 태그 추가..."
+                textField.snp.makeConstraints {
+                    $0.edges.equalTo(cell.contentView)
+                    $0.height.equalTo(40)
+                }
+                
+                return cell
+            }
+        } else {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "insertTagCell")
+            
+            cell.contentView.addSubview(textField)
+            textField.placeholder = "새로운 태그 추가..."
+            textField.snp.makeConstraints {
+                $0.edges.equalTo(cell.contentView)
+                $0.height.equalTo(40)
+            }
+            
+            return cell
         }
-        
-        return cell
+    }
+}
+
+extension AddTagViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("tap")
+        guard let newTag = textField.text, !newTag.isEmpty else { return }
+        print(newTag)
+        tempList.append(newTag)
+        print(tempList)
+        tableView.reloadData()
     }
     
-    
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
 }
