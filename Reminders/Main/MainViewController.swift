@@ -161,7 +161,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.accessoryType = .disclosureIndicator
         } else {
             cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
-            
+            cell.selectionStyle = .none
         }
         return cell
     }
@@ -176,7 +176,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-           
+            let vc = ListViewController()
+            navigationController?.pushViewController(vc, animated: true)
        } else {
            
        }

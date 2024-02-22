@@ -11,7 +11,7 @@ import SnapKit
 class ListTableViewCell: BaseTableViewCell {
     
     let data = ReminderModel()
-    let checkButton = UIButton(type: .roundedRect)
+    let checkButton = UIButton()
     let stackView = UIStackView()
     let titleStackView = UIStackView()
     let priorityMark = UILabel()
@@ -41,6 +41,7 @@ class ListTableViewCell: BaseTableViewCell {
     }
     
     override func configureView() {
+        checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -48,8 +49,8 @@ class ListTableViewCell: BaseTableViewCell {
         stackView.spacing = 4
         
         titleStackView.axis = .horizontal
-        titleStackView.alignment = .fill
-        titleStackView.distribution = .equalSpacing
+        titleStackView.alignment = .leading
+        titleStackView.distribution = .fill
         titleStackView.spacing = 4
         
         titleLabel.text = data.title
@@ -58,17 +59,18 @@ class ListTableViewCell: BaseTableViewCell {
         memoLabel.text = data.memo
         memoLabel.text = "testmemo"
         
-        dateLabel.text = data.finalDate?.formattedDate
+        dateLabel.text = data.date?.formattedDate
         dateLabel.text = Date().formattedDate
     }
     
     override func configureConstraints() {
         checkButton.snp.makeConstraints {
             $0.left.top.equalTo(contentView).offset(10)
+            $0.size.equalTo(44)
         }
         stackView.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView)
-            $0.left.equalTo(checkButton)
+            $0.left.equalTo(checkButton.snp.right)
             $0.right.equalTo(contentView)
         }
     }

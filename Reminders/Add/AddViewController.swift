@@ -7,21 +7,23 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class AddViewController: BaseViewController {
-
+    
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     let titleTextField = UITextField()
     let memoTextField = UITextView()
     let repository = ReminderRepository()
-    let date: Date? = nil
-    let tag: String? = nil
-    let priority: Int? = nil
+    var date: Date? = nil
+    var tag: String? = nil
+    var priority: Int? = nil
+    let flag: Bool = false
     
     override func configureHierarchy() {
         view.addSubview(tableView)
     }
-
+    
     override func configureView() {
         super.configureView()
         
@@ -32,6 +34,9 @@ class AddViewController: BaseViewController {
         
         let addBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(tapAddButton))
         navigationItem.rightBarButtonItem = addBarButtonItem
+        navigationItem.rightBarButtonItem!.isEnabled = false
+        
+        titleTextField.delegate = self
         
         tableView.sectionHeaderHeight = 0
         
@@ -48,22 +53,22 @@ class AddViewController: BaseViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-
+    
     @objc func tapCancelButton() {
         dismiss(animated: true)
     }
     
     @objc func tapAddButton() {
         guard let title = titleTextField.text, !title.isEmpty else { return }
-        guard let memo = memoTextField.text, !memo.isEmpty else { return  }
-        guard let date = date else { return }
-        guard let tag = tag else { return }
-        guard let priority = priority else { return }
         
-        let data = ReminderModel(title: title, compelete: false, flag: false)
-        ReminderModel(title: title, memo: memo, regDate: Date(), finalDate: date, tags: tag, priority: priority, compelete: false, flag: false)
+        let date = date ?? nil
+        let tag = tag ?? nil
+        let priority = priority ?? nil
+        
+        let data = ReminderModel(title: title, memo: memoTextField.text, finalDate: date, tags: List<String?>(), priority: priority, compelete: false, flag: flag)
         
         repository.createItem(data)
+        print(data)
         
         dismiss(animated: true)
     }
@@ -115,8 +120,8 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "목록"
             cell.accessoryType = .disclosureIndicator
         }
-       
-        return cell 
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -126,4 +131,16 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+}
+
+extension AddViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = titleTextField.text ?? ""
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        navigationItem.rightBarButtonItem!.isEnabled = !updatedText.isEmpty
+        
+        return true
+    }
 }

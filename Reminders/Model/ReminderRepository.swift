@@ -12,6 +12,7 @@ final class ReminderRepository {
     
     private let realm = try! Realm()
     
+    // 생성
     func createItem(_ item: ReminderModel) {
         do {
             try realm.write {
@@ -24,8 +25,10 @@ final class ReminderRepository {
         print(realm.configuration.fileURL!)
     }
     
+    // 데이터 주기
     func fetchItem() -> Results<ReminderModel> {
         return realm.objects(ReminderModel.self)
     }
+    
     
 }
