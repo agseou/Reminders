@@ -7,25 +7,27 @@
 
 import UIKit
 import SnapKit
-
-struct Item {
-    var title: String?
-    var isExpanded: Bool?
-}
+import Toast
 
 class AddDetailViewController: BaseViewController {
-
+    
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     let urlTextField = UITextField()
-    var items: [Item] = [Item(title: "날짜", isExpanded: false),
-                         Item(title: "시간", isExpanded: false),
-                         Item(title: "태그", isExpanded: nil),
-                         Item(title: "위치", isExpanded: false),
-                         Item(title: "깃발", isExpanded: false),
-                         Item(title: "우선순위", isExpanded: nil),
-                         Item(title: "이미지추가", isExpanded: false),
-                         Item(title: "URL", isExpanded: nil),]
-
+    var sender: ((ReminderModel) -> Void)?
+    var todo = ReminderModel()
+    var isFlagged: Bool = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveData), name: NSNotification.Name("Date"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveData), name: NSNotification.Name("Priority"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        sender?(todo)
+    }
+    
     override func configureHierarchy() {
         view.addSubview(tableView)
     }
@@ -43,11 +45,26 @@ class AddDetailViewController: BaseViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "addImageCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "urlCell")
     }
-
+    
     override func configureConstraints() {
         tableView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    @objc func receiveData(_ notification: NSNotification) {
+        if let date = notification.userInfo?["selectedDate"] as? Date {
+            self.todo.date = date
+            tableView.reloadData()
+        }
+        if let priority = notification.userInfo?["selectedPriority"] as? Int {
+            self.todo.priority = priority
+            tableView.reloadData()
+        }
+    }
+    
+    @objc func flagSwitchChanged(_ sender: UISwitch) {
+        self.todo.flag = sender.isOn
     }
 }
 
@@ -57,11 +74,7 @@ extension AddDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return items[section].isExpanded! ? 3 : 2
-        } else {
-            return items[section].isExpanded ?? false ? 2 : 1
-        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,12 +84,13 @@ extension AddDetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "날짜"
             cell.accessoryView = UISwitch()
             
+            cell.detailTextLabel?.text = todo.date?.formattedDate ?? nil
             
-        } else if indexPath == IndexPath(row: 1, section: 0){
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "dateCell")
-            cell.textLabel?.text = "시간"
-            cell.accessoryView = UISwitch()
-            
+            //        } else if indexPath == IndexPath(row: 1, section: 0){
+            //            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "dateCell")
+            //            cell.textLabel?.text = "시간"
+            //            cell.accessoryView = UISwitch()
+            //
         } else if indexPath == IndexPath(row: 0, section: 1){
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "tagCell")
             cell.textLabel?.text = "태그"
@@ -87,15 +101,24 @@ extension AddDetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "위치"
             cell.accessoryView = UISwitch()
             
+            
         } else if indexPath == IndexPath(row: 0, section: 3){
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "flagCell")
             cell.textLabel?.text = "깃발"
-            cell.accessoryView = UISwitch()
+            
+            let flagSwitch = UISwitch()
+            flagSwitch.isOn = todo.flag
+            flagSwitch.addTarget(self, action: #selector(flagSwitchChanged(_:)), for: .valueChanged)
+            
+            cell.accessoryView = flagSwitch
+            cell.selectionStyle = .none
             
         } else if indexPath == IndexPath(row: 0, section: 4){
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "priorityCell")
             cell.textLabel?.text = "우선순위"
             cell.accessoryType = .disclosureIndicator
+            
+            cell.detailTextLabel?.text = todo.priority?.priorityDescription
             
         } else if indexPath == IndexPath(row: 0, section: 5){
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "addImageCell")
@@ -117,11 +140,22 @@ extension AddDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == IndexPath(row: 0, section: 1){
-            let vc = UINavigationController(rootViewController: AddTagViewController())
-            present(vc, animated: true)
+        if indexPath == IndexPath(row: 0, section: 0){
+            let vc = AddDateViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath == IndexPath(row: 0, section: 1) {
+            let vc = AddTagViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath == IndexPath(row: 0, section: 2) {
+            // 위치 미개발 토스트 메시지
+            self.view.makeToast("아직 구현 중입니다!", duration: 3.0, position: .bottom)
+        } else if indexPath == IndexPath(row: 0, section: 4) {
+            // 우선순위
+            let vc = AddPriorityViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath == IndexPath(row: 0, section: 5) {
+            let vc =  AddImageViewController()
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
 }
-

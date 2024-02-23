@@ -66,11 +66,11 @@ class AddTagViewController: BaseViewController {
     }
     
     @objc func tapCancelButton() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func tapCompleteButton() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
 

@@ -73,17 +73,27 @@ enum SortList: CaseIterable {
     var num: Int {
         switch self {
         case .Expected:
-            0
+            repository.fetchItem(ofType: ReminderModel.self).filter { item in
+                guard let item = item.date else { return false }
+                return Date() < item
+            }.count
         case .Today:
-            0
+            repository.fetchItem(ofType: ReminderModel.self).filter { item in
+                guard let item = item.date else { return false }
+                return Calendar.current.isDateInToday(item)
+            }.count
         case .All:
-            0
+            repository.fetchItem(ofType: ReminderModel.self).count
         case .Flag:
-            0
+            repository.fetchItem(ofType: ReminderModel.self).filter({ item in
+                item.flag
+            }).count
         case .Complete:
-            0
+            repository.fetchItem(ofType: ReminderModel.self).filter({ item in
+                item.compelete
+            }).count
         case .Assignment:
-            0
+            repository.fetchItem(ofType: ReminderModel.self).count
         }
     }
 }

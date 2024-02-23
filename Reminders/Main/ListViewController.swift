@@ -12,7 +12,6 @@ import RealmSwift
 class ListViewController: BaseViewController {
 
     let tableView = UITableView()
-    let viewTitle: String = "전체"
     let repository = ReminderRepository()
     var list : Results<ReminderModel>!
     
@@ -21,11 +20,12 @@ class ListViewController: BaseViewController {
     }
     
     override func configureView() {
-        super.configureView()
+        view.backgroundColor = .systemBackground
+        
         list = repository.fetchItem(ofType: ReminderModel.self)
         
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
-        navigationItem.title = viewTitle
         
         tableView.backgroundColor = .clear
         tableView.delegate = self

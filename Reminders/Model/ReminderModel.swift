@@ -32,7 +32,7 @@ class ReminderModel: Object {
         self.memo = memo
         self.date = date
         self.tags = tags
-        self.priority = priority
+        self.priority = 0
         self.compelete = false // 생성시에 기본은 false
         self.flag = false // 생성시에 기본은 false
     }

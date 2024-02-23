@@ -15,10 +15,7 @@ class AddViewController: BaseViewController {
     let titleTextField = UITextField()
     let memoTextField = UITextView()
     let repository = ReminderRepository()
-    var date: Date? = nil
-    var tag: String? = nil
-    var priority: Int? = nil
-    let flag: Bool = false
+    var data = ReminderModel()
     
     override func configureHierarchy() {
         view.addSubview(tableView)
@@ -54,6 +51,27 @@ class AddViewController: BaseViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("DismissAddView"), object: nil, userInfo: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveData), name: NSNotification.Name("Data"), object: nil)
+    }
+    
+    @objc func receiveData(_ notification: NSNotification) {
+        if let data = notification.userInfo?["Data"] as? ReminderModel {
+            self.data.date = data.date
+            self.data.flag = data.flag
+            self.data.priority = data.priority
+        }
+    }
+    
     @objc func tapCancelButton() {
         checkCancelActionSheet() {
             self.dismiss(animated: true)
@@ -62,12 +80,8 @@ class AddViewController: BaseViewController {
     
     @objc func tapAddButton() {
         guard let title = titleTextField.text, !title.isEmpty else { return }
-        
-        let date = date ?? nil
-            // let tag = tag ?? nil
-        let priority = priority ?? nil
-        
-        let data = ReminderModel(title: title, memo: memoTextField.text, finalDate: date, tags: List<String?>(), priority: priority, compelete: false, flag: flag)
+        data.title = title
+        data.memo = memoTextField.text
         
         repository.createItem(data)
         print(data)
@@ -129,6 +143,12 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let vc = AddDetailViewController()
+            vc.sender = {
+                self.data.date = $0.date
+                self.data.flag = $0.flag
+                self.data.priority = $0.priority
+            }
+            vc.todo = data
             navigationController?.pushViewController(vc, animated: true)
         }
     }

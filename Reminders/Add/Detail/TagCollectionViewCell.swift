@@ -17,6 +17,8 @@ class TagCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureView() {
+        super.configureView()
+        
         var config = UIButton.Configuration.gray()
         tagButton.configuration = config
     }

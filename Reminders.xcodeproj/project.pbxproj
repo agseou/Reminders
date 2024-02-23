@@ -36,6 +36,10 @@
 		A0553F262B86ECB100F2C600 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0553F252B86ECB100F2C600 /* TagCollectionViewCell.swift */; };
 		A0553F2C2B8710D200F2C600 /* SortList+Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0553F2B2B8710D200F2C600 /* SortList+Enum.swift */; };
 		A0553F2E2B8757A700F2C600 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0553F2D2B8757A700F2C600 /* UIViewController+Extension.swift */; };
+		A09E2A812B8876F500961823 /* AddDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E2A802B8876F500961823 /* AddDateViewController.swift */; };
+		A09E2A852B88786D00961823 /* AddImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E2A842B88786D00961823 /* AddImageViewController.swift */; };
+		A09E2A892B8894C500961823 /* AddPriorityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E2A882B8894C500961823 /* AddPriorityViewController.swift */; };
+		A09E2A8D2B889CD300961823 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E2A8C2B889CD300961823 /* Int+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +70,10 @@
 		A0553F252B86ECB100F2C600 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		A0553F2B2B8710D200F2C600 /* SortList+Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortList+Enum.swift"; sourceTree = "<group>"; };
 		A0553F2D2B8757A700F2C600 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		A09E2A802B8876F500961823 /* AddDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateViewController.swift; sourceTree = "<group>"; };
+		A09E2A842B88786D00961823 /* AddImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageViewController.swift; sourceTree = "<group>"; };
+		A09E2A882B8894C500961823 /* AddPriorityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPriorityViewController.swift; sourceTree = "<group>"; };
+		A09E2A8C2B889CD300961823 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,9 +163,8 @@
 			children = (
 				A0391FEB2B8363040027EC70 /* AddViewController.swift */,
 				A03920052B8366300027EC70 /* AddDetailViewController.swift */,
-				A03920182B848BF60027EC70 /* AddTagViewController.swift */,
-				A0553F252B86ECB100F2C600 /* TagCollectionViewCell.swift */,
 				A039203A2B84CE1E0027EC70 /* AddListViewController.swift */,
+				A09E2A822B88780C00961823 /* Detail */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -168,6 +175,7 @@
 				A0391FFF2B8365380027EC70 /* FileManager+Extension.swift */,
 				A03920012B83653E0027EC70 /* Date+Extension.swift */,
 				A0553F2D2B8757A700F2C600 /* UIViewController+Extension.swift */,
+				A09E2A8C2B889CD300961823 /* Int+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -178,6 +186,18 @@
 				A039200A2B83C40F0027EC70 /* ListIcon.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A09E2A822B88780C00961823 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				A03920182B848BF60027EC70 /* AddTagViewController.swift */,
+				A09E2A882B8894C500961823 /* AddPriorityViewController.swift */,
+				A09E2A842B88786D00961823 /* AddImageViewController.swift */,
+				A0553F252B86ECB100F2C600 /* TagCollectionViewCell.swift */,
+				A09E2A802B8876F500961823 /* AddDateViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,10 +284,12 @@
 			files = (
 				A03920002B8365380027EC70 /* FileManager+Extension.swift in Sources */,
 				A0391FEA2B8362FE0027EC70 /* MainViewController.swift in Sources */,
+				A09E2A852B88786D00961823 /* AddImageViewController.swift in Sources */,
 				A0553F2C2B8710D200F2C600 /* SortList+Enum.swift in Sources */,
 				A0391FFE2B8364D30027EC70 /* ReminderRepository.swift in Sources */,
 				A0391FE62B83618E0027EC70 /* BaseCollectionViewCell.swift in Sources */,
 				A0391FEC2B8363040027EC70 /* AddViewController.swift in Sources */,
+				A09E2A812B8876F500961823 /* AddDateViewController.swift in Sources */,
 				A03920042B83654D0027EC70 /* MainCollectionViewCell.swift in Sources */,
 				A03920022B83653E0027EC70 /* Date+Extension.swift in Sources */,
 				A0391FFC2B8364BE0027EC70 /* ReminderModel.swift in Sources */,
@@ -281,9 +303,11 @@
 				A0391FC92B8360BA0027EC70 /* AppDelegate.swift in Sources */,
 				A03920062B8366300027EC70 /* AddDetailViewController.swift in Sources */,
 				A039200B2B83C40F0027EC70 /* ListIcon.swift in Sources */,
+				A09E2A8D2B889CD300961823 /* Int+Extension.swift in Sources */,
 				A0553F262B86ECB100F2C600 /* TagCollectionViewCell.swift in Sources */,
 				A0391FE82B83619B0027EC70 /* BaseTableViewCell.swift in Sources */,
 				A0391FCB2B8360BA0027EC70 /* SceneDelegate.swift in Sources */,
+				A09E2A892B8894C500961823 /* AddPriorityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

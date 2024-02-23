@@ -16,10 +16,26 @@ struct ListBox {
 }
 
 class MainViewController: BaseViewController {
-
+    
     let searchController = UISearchController()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didDismissAddNotification(_:)),
+            name: NSNotification.Name("DismissAddView"),
+            object: nil
+        )
+    }
+    
+    @objc func didDismissAddNotification(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
     
     override func configureHierarchy() {
         view.addSubview(tableView)
@@ -131,7 +147,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let item = SortList.allCases[indexPath.item]
+        
         let vc = ListViewController()
+        vc.title = item.title
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -161,7 +180,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-         if section == 0 {
+        if section == 0 {
             return "나의 목록"
         } else {
             return "태그"
@@ -172,9 +191,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let vc = ListViewController()
             navigationController?.pushViewController(vc, animated: true)
-       } else {
-           
-       }
+        } else {
+            
+        }
     }
-   
+    
 }
